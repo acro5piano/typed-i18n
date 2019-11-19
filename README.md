@@ -31,16 +31,31 @@ const ja = {
 
 type Lang = 'en' | 'ja'
 
-test('TypedI18n', () => {
-  const t = new TypedI18n<Lang, typeof ja>()
+const t = new TypedI18n<Lang, typeof ja>()
 
-  t.addLocale('ja', ja)
-  t.addLocale('en', en)
+t.addLocale('ja', ja)
+t.addLocale('en', en)
 
-  t.setLocale('ja')
-  expect(t.trans.hello).toBe('こんにちは')
+t.setLocale('ja')
+console.log(t.trans.hello) // => こんにちは
 
-  t.setLocale('en')
-  expect(t.trans.hello).toBe('Hello')
+t.setLocale('en')
+console.log(t.trans.hello) // => Hello
+```
+
+# Type-safety
+
+In the above example, the following code will throw TypeScript errors.
+
+```typescript
+// missing the locale
+t.setLocale('cn')
+
+// missing the key
+t.trans.notExistKey
+
+// try to add a locale with missing keys
+t.addLocale('de', {
+  hello: 'Guten Tag',
 })
 ```
