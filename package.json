@@ -1,0 +1,20 @@
+{
+  "name": "typed-i18n",
+  "version": "0.0.1",
+  "main": "build/index.js",
+  "repository": "git@github.com:acro5piano/typed-i18n",
+  "author": "gosho-kazuya <ketsume0211@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "yarn test --coverage"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.9",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
+  }
+}

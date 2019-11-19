@@ -1,23 +1,4 @@
-# typed-i18n
-
-type-safe i18n library
-
-# Install
-
-```
-npm install --save typed-i18n
-```
-
-Or if you use Yarn:
-
-```
-yarn add typed-i18n
-```
-
-# Usage
-
-```typescript
-import TypedI18n from 'typed-i18n'
+import TypedI18n from '..'
 
 const en = {
   hello: 'Hello',
@@ -33,7 +14,6 @@ type Lang = 'en' | 'ja'
 
 test('TypedI18n', () => {
   const t = new TypedI18n<Lang, typeof ja>()
-
   t.addLocale('ja', ja)
   t.addLocale('en', en)
 
@@ -42,5 +22,7 @@ test('TypedI18n', () => {
 
   t.setLocale('en')
   expect(t.trans.hello).toBe('Hello')
+
+  // This throws an error:
+  // t.setLocale('cn')
 })
-```
