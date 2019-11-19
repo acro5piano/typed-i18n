@@ -3,19 +3,19 @@ import TypedI18n from '..'
 const en = {
   hello: 'Hello',
   goodbye: 'Goodbye',
-  helloButGoodbye: t => `${t.trans.hello}, but ${t.trans.goodbye}`,
+  helloButGoodbye: () => `${en.hello}, but ${en.goodbye}`,
 }
 
 const ja = {
   hello: 'こんにちは',
   goodbye: 'さようなら',
-  helloButGoodbye: t => `${t.trans.hello} ですが ${t.trans.goodbye}`,
+  helloButGoodbye: () => `${ja.hello}ですが${ja.goodbye}`,
 }
 
 type Lang = 'en' | 'ja'
 
 test('TypedI18n', () => {
-  const t = new TypedI18n<Lang, typeof en>()
+  const t = new TypedI18n<Lang, typeof en & typeof ja>()
     .addLocale('en', en)
     .addLocale('ja', ja)
 
@@ -25,6 +25,7 @@ test('TypedI18n', () => {
 
   t.setLocale('ja')
   expect(t.trans.hello).toBe('こんにちは')
+  expect(t.trans.helloButGoodbye).toBe('こんにちはですがさようなら')
 
   // This throws an error:
   // t.setLocale('cn')

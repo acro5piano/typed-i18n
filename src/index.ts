@@ -1,32 +1,31 @@
-type TransFn<L extends string, T> = (t: TypedI18n<L, T>) => string
+type TransFn = (...args: string[]) => string
 
-interface TransFnWithKey<L extends string, T> {
-  [key: string]: string | TransFn<L, T>
+interface TransFnWithKey {
+  [key: string]: string | TransFn
 }
 
-type Trans<L extends string, T> = object & T & TransFnWithKey<L, T>
+type Trans<T> = object & T & TransFnWithKey
 
-function transform<L extends string, T extends {}>(
-  t: TypedI18n<L, T>,
-  obj: T,
-): Trans<L, T> {
+function transform<T extends {}>(obj: T): Trans<T> {
   return Object.keys(obj).reduce((car, key) => {
     const value = (obj as any)[key]
     if (typeof value === 'string') {
       return { ...car, [key]: value }
     }
-    return { ...car, [key]: value(t) }
+    return { ...car, [key]: value() }
   }, {} as T)
+}
+
+export function createLocale<T>(trans: Trans<T>) {
+  return trans
 }
 
 export class TypedI18n<L extends string, T> {
   locale!: L
-  transMap = new Map<L, T & TransFnWithKey<L, T>>()
+  transMap = new Map<L, Trans<T>>()
 
-  addLocale(lang: L, trans: Trans<L, T>): this {
-    this.transMap.set(lang, trans)
-    const interop = transform<L, T>(this, trans)
-    console.log(interop)
+  addLocale(lang: L, trans: Trans<T>): this {
+    const interop = transform(trans)
     this.transMap.set(lang, interop)
     return this
   }
