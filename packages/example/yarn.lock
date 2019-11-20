@@ -9576,10 +9576,10 @@ type@^2.0.0:
   resolved "https://registry.yarnpkg.com/type/-/type-2.0.0.tgz#5f16ff6ef2eb44f260494dae271033b29c09a9c3"
   integrity sha512-KBt58xCHry4Cejnc2ISQAF7QY+ORngsWfxezO68+12hKV6lQY8P/psIkcbjeHWn7MqcgciWJyCCevFMJdIXpow==
 
-typed-i18n@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/typed-i18n/-/typed-i18n-0.0.5.tgz#e0aff92ea90bdc51d4dac9d4f41e2b99feefbe0e"
-  integrity sha512-c939i8syIVxzRkyj3v6fQYoUU9s1Lts69fcJfbfJcdcnFmRf0atCIwArWbnux3Qja8EK0K/TPixQKr+4mgs79Q==
+typed-i18n@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/typed-i18n/-/typed-i18n-0.0.6.tgz#d718a86f101d056719f7b1042ce7a8bf8da7deb2"
+  integrity sha512-KcLfkFlVr354GyFb1NK+idLgWjhopjNab8KyOAfsVbjbLitf/KvM34YDs501o0QmieJYjJKGa/XVjyc3sRQj5Q==
 
 typedarray@^0.0.6:
   version "0.0.6"

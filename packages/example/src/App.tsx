@@ -1,18 +1,16 @@
 import React from 'react'
 import './App.css'
-import { useTrans } from './i18n'
+import { useTrans, useForceUpdate } from './i18n'
 
 function App() {
   const t = useTrans()
+  const update = useForceUpdate()
 
   // TODO
   const changeLang = () => {
     t.setLocale(t.locale === 'en' ? 'ja' : 'en')
+    update()
   }
-
-  React.useEffect(() => {
-    console.log('hoge')
-  })
 
   return (
     <div className="App">
