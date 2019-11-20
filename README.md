@@ -172,14 +172,12 @@ function App() {
   }, [changeLocale, t.locale])
 
   return (
-    <Provider value={t}>
-      <div className="App">
-        <div className="App-title">{t.trans.hello}</div>
-        <div className="App-btn" onClick={changeLang}>
-          {t.trans.goodbye}
-        </div>
+    <div className="App">
+      <div className="App-title">{t.trans.hello}</div>
+      <div className="App-btn" onClick={changeLang}>
+        {t.trans.goodbye}
       </div>
-    </Provider>
+    </div>
   )
 }
 
