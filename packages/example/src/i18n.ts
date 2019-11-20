@@ -1,4 +1,3 @@
-import * as React from 'react'
 import TypedI18n from 'typed-i18n'
 import { createContextHook } from 'typed-i18n/build/jsx'
 
@@ -19,14 +18,9 @@ const t = new TypedI18n<Lang, Translations>()
   .addLocale('en', en)
   .addLocale('ja', ja)
 
-export const useTrans = createContextHook<Lang, Translations>()
-
-export function useForceUpdate() {
-  const [, setTick] = React.useState(0)
-  const update = React.useCallback(() => {
-    setTick(tick => tick + 1)
-  }, [])
-  return update
-}
+export const { useTrans, useChangeLocale } = createContextHook<
+  Lang,
+  Translations
+>()
 
 export default t

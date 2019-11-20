@@ -18,7 +18,7 @@ const typedI18n = new TypedI18n<Lang, Locale>()
   .addLocale('en', en)
   .addLocale('ja', ja)
 
-const useTrans = createContextHook<Lang, Locale>()
+const { useTrans } = createContextHook<Lang, Locale>()
 
 function App() {
   return (

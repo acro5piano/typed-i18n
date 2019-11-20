@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.App-message {
+  margin: 8px;
+}
+
 .App-btn {
   margin: 8px;
   color: #fff;

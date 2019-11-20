@@ -1,22 +1,21 @@
 import React from 'react'
 import './App.css'
-import { useTrans, useForceUpdate } from './i18n'
+import { useTrans, useChangeLocale } from './i18n'
 
 function App() {
   const t = useTrans()
-  const update = useForceUpdate()
+  const changeLocale = useChangeLocale()
 
-  // TODO
   const changeLang = () => {
-    t.setLocale(t.locale === 'en' ? 'ja' : 'en')
-    update()
+    changeLocale(t.locale === 'en' ? 'ja' : 'en')
   }
 
   return (
     <div className="App">
-      <span className="App-btn" onClick={changeLang}>
+      <div className="App-title">{t.trans.hello}</div>
+      <div className="App-btn" onClick={changeLang}>
         {t.trans.goodbye}
-      </span>
+      </div>
     </div>
   )
 }
