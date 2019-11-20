@@ -12,12 +12,21 @@ function transform<T extends {}>(obj: T): Trans<T> {
     if (typeof value === 'string') {
       return { ...car, [key]: value }
     }
+    if (value.name === 'lazyIntorp') {
+      return { ...car, [key]: value }
+    }
     return { ...car, [key]: value() }
   }, {} as T)
 }
 
 export function createLocale<T>(trans: Trans<T>) {
   return trans
+}
+
+export function intorp(fn: (...args: string[]) => string) {
+  return function lazyIntorp(...args: string[]) {
+    return fn(...args)
+  }
 }
 
 export class TypedI18n<L extends string, T> {
