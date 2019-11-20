@@ -5,6 +5,9 @@ const en = {
   helloWithName: interp(name => `Hello, ${name}`),
   goodbye: 'Goodbye',
   helloButGoodbye: () => `${en.hello}, but ${en.goodbye}`,
+  screen: {
+    title: 'Welcome',
+  },
 }
 
 const ja = {
@@ -12,6 +15,9 @@ const ja = {
   helloWithName: interp(name => `こんにちは、 ${name}`),
   goodbye: 'さようなら',
   helloButGoodbye: () => `${ja.hello}ですが${ja.goodbye}`,
+  screen: {
+    title: 'ようこそ',
+  },
 }
 
 type Lang = 'en' | 'ja'
@@ -24,9 +30,11 @@ test('TypedI18n', () => {
   expect(t.trans.hello).toBe('Hello')
   expect(t.trans.helloWithName('John')).toBe('Hello, John')
   expect(t.trans.helloButGoodbye).toBe('Hello, but Goodbye')
+  expect(t.trans.screen.title).toBe('Welcome')
 
   t.setLocale('ja')
   expect(t.trans.hello).toBe('こんにちは')
   expect(t.trans.helloWithName('John')).toBe('こんにちは、 John')
   expect(t.trans.helloButGoodbye).toBe('こんにちはですがさようなら')
+  expect(t.trans.screen.title).toBe('ようこそ')
 })

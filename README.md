@@ -126,6 +126,6 @@ t.addLocale('de', {
 
 # TODO
 
-- [ ] Deeply nested object support
-- [ ] Plurals
+- [x] Deeply nested object support
 - [ ] React bindings
+- [ ] Plurals

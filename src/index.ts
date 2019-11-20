@@ -1,7 +1,7 @@
 type TransFn = (...args: string[]) => string
 
 interface TransFnWithKey {
-  [key: string]: string | TransFn
+  [key: string]: string | TransFn | TransFnWithKey
 }
 
 type Trans<T> = object & T & TransFnWithKey
@@ -11,6 +11,9 @@ function transform<T extends {}>(obj: T): Trans<T> {
     const value = (obj as any)[key]
     if (typeof value === 'string') {
       return { ...car, [key]: value }
+    }
+    if (typeof value === 'object') {
+      return { ...car, [key]: transform(value) }
     }
     if (value.name === 'lazyIntorp') {
       return { ...car, [key]: value }
