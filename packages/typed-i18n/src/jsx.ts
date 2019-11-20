@@ -24,14 +24,20 @@ function useChangeLocaleBase<L>() {
   return update
 }
 
-export function createContextHook<L extends string, T>() {
+export function createContextHooks<L extends string, T>(t: TypedI18n<L, T>) {
   function useTrans() {
     return useTransBase<L, T>()
   }
   function useChangeLocale() {
     return useChangeLocaleBase<L>()
   }
-  return { useTrans, useChangeLocale }
+  function Provider<T>(props: T) {
+    return React.createElement(I18nContext.Provider, {
+      value: t,
+      ...props,
+    })
+  }
+  return { useTrans, useChangeLocale, Provider }
 }
 
 export const { Provider } = I18nContext

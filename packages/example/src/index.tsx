@@ -1,12 +1,11 @@
-import React from 'react'
-import { Provider } from 'typed-i18n/jsx'
-import ReactDOM from 'react-dom'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import t from './i18n'
+import { Provider } from './i18n'
 
 ReactDOM.render(
-  <Provider value={t}>
+  <Provider>
     <App />
   </Provider>,
   document.getElementById('root'),

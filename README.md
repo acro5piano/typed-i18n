@@ -130,7 +130,7 @@ You can use `typed-i18n` with React:
 ```typescript
 // i18n.ts
 import TypedI18n from 'typed-i18n'
-import { createContextHook } from 'typed-i18n/jsx'
+import { createContextHooks } from 'typed-i18n/jsx'
 
 const en = {
   hello: 'Hello',
@@ -149,19 +149,14 @@ const t = new TypedI18n<Lang, Translations>()
   .addLocale('en', en)
   .addLocale('ja', ja)
 
-export const { useTrans, useChangeLocale } = createContextHook<
-  Lang,
-  Translations
->()
-
-export default t
+export const { useTrans, useChangeLocale, Provider } = createContextHooks(t)
 ```
 
 ```typescript
 // App.tsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import trans, { useTrans, useChangeLocale } from './i18n'
+import { useTrans, useChangeLocale, Provider } from './i18n'
 
 function App() {
   const t = useTrans()
@@ -182,7 +177,7 @@ function App() {
 }
 
 ReactDOM.render(
-  <Provider value={trans}>
+  <Provider>
     <App />
   </Provider>,
   document.getElementById('root'),

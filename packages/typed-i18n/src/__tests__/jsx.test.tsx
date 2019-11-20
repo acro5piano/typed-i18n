@@ -1,6 +1,6 @@
 import * as React from 'react'
 import TypedI18n from '..'
-import { Provider, createContextHook } from '../jsx'
+import { createContextHooks } from '../jsx'
 import TestRenderer from 'react-test-renderer' // ES6
 
 const en = {
@@ -18,11 +18,11 @@ const typedI18n = new TypedI18n<Lang, Locale>()
   .addLocale('en', en)
   .addLocale('ja', ja)
 
-const { useTrans } = createContextHook<Lang, Locale>()
+const { useTrans, Provider } = createContextHooks(typedI18n)
 
 function App() {
   return (
-    <Provider value={typedI18n}>
+    <Provider>
       <Component />
     </Provider>
   )

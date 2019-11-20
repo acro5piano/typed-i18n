@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import './App.css'
 import { useTrans, useChangeLocale } from './i18n'
 
