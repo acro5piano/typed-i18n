@@ -1,15 +1,15 @@
-import TypedI18n, { intorp } from '..'
+import TypedI18n, { interp } from '..'
 
 const en = {
   hello: 'Hello',
-  helloWithName: intorp(name => `Hello, ${name}`),
+  helloWithName: interp(name => `Hello, ${name}`),
   goodbye: 'Goodbye',
   helloButGoodbye: () => `${en.hello}, but ${en.goodbye}`,
 }
 
 const ja = {
   hello: 'こんにちは',
-  helloWithName: intorp(name => `こんにちは、 ${name}`),
+  helloWithName: interp(name => `こんにちは、 ${name}`),
   goodbye: 'さようなら',
   helloButGoodbye: () => `${ja.hello}ですが${ja.goodbye}`,
 }
