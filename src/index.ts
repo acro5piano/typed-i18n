@@ -44,6 +44,7 @@ export class TypedI18n<L extends string, T> {
 
   setLocale(locale: L) {
     this.locale = locale
+    return this
   }
 
   get trans(): T {

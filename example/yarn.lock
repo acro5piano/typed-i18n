@@ -46,10 +46,10 @@ ts-node@^8.5.2:
     source-map-support "^0.5.6"
     yn "^3.0.0"
 
-typed-i18n@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/typed-i18n/-/typed-i18n-0.0.3.tgz#26bfddfb95f4a2303b52e6720f294fd9303eb756"
-  integrity sha512-cZDuSJgNbtnG3R5qD4bgFhUgPkstIMdEs1DjQvoRJTYBYUPNrtNaH/W68lGsqJqPfE1LVQ9H6I6y67vSiEZTlA==
+typed-i18n@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/typed-i18n/-/typed-i18n-0.0.4.tgz#eb19edfcdce1253b620e15009cde895b943683a3"
+  integrity sha512-x5y15OCuZc4nTseko9d1meqrH6TDB0vt/GWTD6R+p/SRDhCGNRPML14GQzEytG1/LEDArWyfey0qV/yGgbpV4Q==
 
 typescript@^3.7.2:
   version "3.7.2"

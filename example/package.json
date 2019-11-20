@@ -7,7 +7,7 @@
     "start": "ts-node index.ts"
   },
   "dependencies": {
-    "typed-i18n": "^0.0.3"
+    "typed-i18n": "^0.0.4"
   },
   "devDependencies": {
     "ts-node": "^8.5.2",

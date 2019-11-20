@@ -1,6 +1,6 @@
 {
   "name": "typed-i18n",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "repository": "git@github.com:acro5piano/typed-i18n",
@@ -15,8 +15,12 @@
   "devDependencies": {
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.9",
+    "@types/react": "^16.9.11",
+    "@types/react-test-renderer": "^16.9.1",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "react-test-renderer": "^16.12.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.7.2"
   }
