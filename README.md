@@ -155,7 +155,9 @@ export const { useTrans, useChangeLocale } = createContextHook<
 >()
 
 export default t
+```
 
+```typescript
 // App.tsx
 import React from 'react'
 import ReactDOM from 'react-dom'
