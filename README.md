@@ -60,8 +60,24 @@ t.setLocale('ja')
 console.log(t.trans.hello) // => こんにちは
 ```
 
-If there are some mistakes in your translations, TS will check them. see [#type-safety](#type-safety)
-t.setLocale('ja')
+If there are some mistakes in your translations, TS will check them.
+
+# Type-safety
+
+In the above example, the following code will throw TypeScript errors.
+
+```typescript
+// missing the locale
+t.setLocale('cn')
+
+// missing the key
+t.trans.notExistKey
+
+// try to add a locale with missing keys
+t.addLocale('de', {
+  hello: 'Guten Tag',
+})
+```
 
 # Interpolation
 
@@ -107,25 +123,74 @@ const ja = {
 console.log(t.trans.helloButGoodbye) // => Hello, but Goodbye
 ```
 
-# Type-safety
+# React bindings
 
-In the above example, the following code will throw TypeScript errors.
+You can use `typed-i18n` with React:
 
 ```typescript
-// missing the locale
-t.setLocale('cn')
+// i18n.ts
+import TypedI18n from 'typed-i18n'
+import { createContextHook } from 'typed-i18n/jsx'
 
-// missing the key
-t.trans.notExistKey
+const en = {
+  hello: 'Hello',
+  goodbye: 'Goodbye',
+}
 
-// try to add a locale with missing keys
-t.addLocale('de', {
-  hello: 'Guten Tag',
-})
+const ja = {
+  hello: 'こんにちは',
+  goodbye: 'さようなら',
+}
+
+type Lang = 'en' | 'ja'
+type Translations = typeof en & typeof ja
+
+const t = new TypedI18n<Lang, Translations>()
+  .addLocale('en', en)
+  .addLocale('ja', ja)
+
+export const { useTrans, useChangeLocale } = createContextHook<
+  Lang,
+  Translations
+>()
+
+export default t
+
+// App.tsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import trans, { useTrans, useChangeLocale } from './i18n'
+
+function App() {
+  const t = useTrans()
+  const changeLocale = useChangeLocale()
+
+  const changeLang = React.useCallback(() => {
+    changeLocale(t.locale === 'en' ? 'ja' : 'en')
+  }, [changeLocale, t.locale])
+
+  return (
+    <Provider value={t}>
+      <div className="App">
+        <div className="App-title">{t.trans.hello}</div>
+        <div className="App-btn" onClick={changeLang}>
+          {t.trans.goodbye}
+        </div>
+      </div>
+    </Provider>
+  )
+}
+
+ReactDOM.render(
+  <Provider value={trans}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+)
 ```
 
 # TODO
 
 - [x] Deeply nested object support
-- [ ] React bindings
+- [x] React bindings
 - [ ] Plurals
