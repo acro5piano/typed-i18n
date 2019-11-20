@@ -1,5 +1,5 @@
 import TypedI18n from 'typed-i18n'
-import { createContextHook } from 'typed-i18n/build/jsx'
+import { createContextHook } from 'typed-i18n/jsx'
 
 const en = {
   hello: 'Hello',
