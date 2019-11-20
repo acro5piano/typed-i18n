@@ -37,11 +37,12 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "module": "commonjs",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "build"
   },
   "exclude": [
     // "**/__tests__/*",
+    "**/example/**",
     "**/node_modules/**",
     "**/vendor/**",
     ".git",
