@@ -6,9 +6,9 @@ function App() {
   const t = useTrans()
   const changeLocale = useChangeLocale()
 
-  const changeLang = () => {
+  const changeLang = React.useCallback(() => {
     changeLocale(t.locale === 'en' ? 'ja' : 'en')
-  }
+  }, [changeLocale, t.locale])
 
   return (
     <div className="App">
