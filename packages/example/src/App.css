@@ -1,0 +1,17 @@
+.App {
+  padding: 24px;
+  text-align: center;
+}
+
+.App-message {
+  margin: 8px;
+}
+
+.App-btn {
+  margin: 8px;
+  color: #fff;
+  cursor: pointer;
+  padding: 16px 24px;
+  background: mediumseagreen;
+  border-radius: 3px;
+}

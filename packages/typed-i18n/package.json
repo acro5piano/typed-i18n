@@ -1,15 +1,11 @@
 {
   "name": "typed-i18n",
-  "version": "0.0.6",
-  "private": true,
+  "version": "0.0.8",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "repository": "git@github.com:acro5piano/typed-i18n",
   "author": "gosho-kazuya <ketsume0211@gmail.com>",
   "license": "MIT",
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
   "scripts": {
     "test": "jest",
     "test:coverage": "yarn test --coverage",

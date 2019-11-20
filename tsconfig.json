@@ -2,7 +2,7 @@
   "compilerOptions": {
     /* Basic Options */
     "target": "es5",
-    "declaration": false,
+    "declaration": true,
     "sourceMap": true,
     "inlineSources": true,
     "removeComments": true,
@@ -37,11 +37,13 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "module": "commonjs",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "build"
   },
   "exclude": [
     // "**/__tests__/*",
+    "**/build/**",
+    "**/example/**",
     "**/node_modules/**",
     "**/vendor/**",
     ".git",
