@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/acro5piano/typed-i18n.svg?style=svg)](https://circleci.com/gh/acro5piano/typed-i18n)
+[![npm version](https://badge.fury.io/js/typed-i18n.svg)](https://badge.fury.io/js/typed-i18n)
+
 # typed-i18n
 
 type-safe i18n library
