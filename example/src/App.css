@@ -1,0 +1,13 @@
+.App {
+  padding: 24px;
+  text-align: center;
+}
+
+.App-btn {
+  margin: 8px;
+  color: #fff;
+  cursor: pointer;
+  padding: 16px 24px;
+  background: mediumseagreen;
+  border-radius: 3px;
+}
