@@ -1,5 +1,5 @@
 import * as React from 'react'
-import TypedI18n from '.'
+import TypedI18n from './TypedI18n'
 
 const I18nContext = React.createContext<TypedI18n<any, any>>(null as any)
 
@@ -39,5 +39,3 @@ export function createContextHooks<L extends string, T>(t: TypedI18n<L, T>) {
   }
   return { useTrans, useChangeLocale, Provider }
 }
-
-export const { Provider } = I18nContext

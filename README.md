@@ -129,8 +129,7 @@ You can use `typed-i18n` with React:
 
 ```typescript
 // i18n.ts
-import TypedI18n from 'typed-i18n'
-import { createContextHooks } from 'typed-i18n/jsx'
+import TypedI18n, { createContextHooks } from 'typed-i18n'
 
 const en = {
   hello: 'Hello',

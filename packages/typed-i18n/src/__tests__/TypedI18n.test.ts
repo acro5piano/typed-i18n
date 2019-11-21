@@ -1,4 +1,4 @@
-import TypedI18n, { interp } from '..'
+import TypedI18n, { interp } from '../TypedI18n'
 
 const en = {
   hello: 'Hello',
