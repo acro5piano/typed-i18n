@@ -102,10 +102,10 @@ console.log(t.trans.greeting('John')) // => Hello, John
 **2. define `$index` and call `withArgs` method**
 
 ```typescript
-import TypedI18n  from 'typed-i18n'
+import TypedI18n from 'typed-i18n'
 
 const en = {
-  greeting: `Hello, ${name}`),
+  greeting: `Hello, $1`,
 }
 
 const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
