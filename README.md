@@ -135,12 +135,12 @@ import TypedI18n from 'typed-i18n'
 const en = {
   hello: 'Hello',
   goodbye: 'Goodbye',
-  helloButGoodbye: () => `${en.hello}, but ${en.goodbye}`,
+  helloButGoodbye: () => `${en.hello}, but ${en.goodbye}.`,
 }
 
 const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
 
-console.log(t.trans.helloButGoodbye) // => Hello, but Goodbye
+console.log(t.trans.helloButGoodbye) // => Hello, but Goodbye.
 ```
 
 **2. use `$this` expression**
@@ -151,12 +151,12 @@ import TypedI18n from 'typed-i18n'
 const en = {
   hello: 'Hello',
   goodbye: 'Goodbye',
-  helloButGoodbye: '$this.hello, but $this.goodbye',
+  helloButGoodbye: '$this.hello, but $this.goodbye.',
 }
 
 const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
 
-console.log(t.trans.helloButGoodbye) // => Hello, but Goodbye
+console.log(t.trans.helloButGoodbye) // => Hello, but Goodbye.
 ```
 
 # React bindings
