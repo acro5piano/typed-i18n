@@ -25,7 +25,7 @@ Engineers directly write translations. We can completely make them type-safe.
 
 **translator-driven translation**
 
-translators fill yaml/json/spreadsheets/(any) then compile it. It is a common pattern, but type-safety is losed to some extent.
+translators fill yaml/json/spreadsheets/(any) then compile it. It is a common pattern, but type-safety will be lost to some extent.
 
 # Install
 
