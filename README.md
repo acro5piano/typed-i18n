@@ -5,18 +5,6 @@
 
 type-safe i18n library
 
-# Install
-
-```
-npm install --save typed-i18n
-```
-
-Or if you use Yarn:
-
-```
-yarn add typed-i18n
-```
-
 # Why
 
 The aim of `typed-i18n` is to provide zero-configuration type-safe i18n feature.
@@ -28,6 +16,28 @@ Typical i18n libraries uses the syntax of `t('group.key')`, which is apparently 
 - Build-time type safety
 - Editor supports
 - Checking i18n coverage in TS level
+
+Also `typed-i18n` supports two translation flows:
+
+**engineer-driven translation**
+
+Engineers directly write translations. We can completely make them type-safe.
+
+**translator-driven translation**
+
+translators fill yaml/json/spreadsheets/(any) then compile it. It is a common pattern, but type-safety is losed to some extent.
+
+# Install
+
+```
+npm install --save typed-i18n
+```
+
+Or if you use Yarn:
+
+```
+yarn add typed-i18n
+```
 
 # Usage
 
