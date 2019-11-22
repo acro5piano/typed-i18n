@@ -32,6 +32,10 @@ export function interp(fn: (...args: string[]) => string) {
   }
 }
 
+function get(obj: any, path: string) {
+  return path.split('.').reduce((car, key) => car[key], obj)
+}
+
 export class TypedI18n<L extends string, T> {
   locale!: L
   transMap = new Map<L, Trans<T>>()
@@ -55,17 +59,30 @@ export class TypedI18n<L extends string, T> {
 
   getTransProxyHandler() {
     return {
-      get: (trans: any, field: string): typeof Proxy | string => {
+      get: (trans: any, field: string): typeof Proxy | string | Function => {
         const args = this.args
-        const value = trans[field]
+        const value: string | object | Function = trans[field]
         if (typeof value === 'object') {
           return new Proxy(value, this.getTransProxyHandler())
         }
+        if (typeof value === 'function') {
+          return value
+        }
         this.args = []
-        return args.reduce(
+        const argsFilled: string = args.reduce(
           (car, arg, index) => car.replace(`$${index + 1}`, arg),
           trans[field],
         )
+        const THIS_REGEX = /\$this[.|a-z|0-9]+/g
+        const thisArgs = argsFilled.match(THIS_REGEX)
+        if (!thisArgs) {
+          return argsFilled
+        }
+        const thisFilled = thisArgs.reduce((car, thisArg) => {
+          const variable = get(trans, thisArg.replace('$this.', ''))
+          return car.replace(thisArg, variable)
+        }, value)
+        return thisFilled
       },
     }
   }

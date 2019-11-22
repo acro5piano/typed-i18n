@@ -115,7 +115,9 @@ console.log(t.withArgs('John').trans.greeting) // => Hello, John
 
 # Nesting
 
-You can nest your translations by creating getter functions:
+You can nest your translations. There are two options to implement it:
+
+**1. use getter functions**
 
 ```typescript
 import TypedI18n from 'typed-i18n'
@@ -124,6 +126,22 @@ const en = {
   hello: 'Hello',
   goodbye: 'Goodbye',
   helloButGoodbye: () => `${en.hello}, but ${en.goodbye}`,
+}
+
+const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
+
+console.log(t.trans.helloButGoodbye) // => Hello, but Goodbye
+```
+
+**2. use `$this` expression**
+
+```typescript
+import TypedI18n from 'typed-i18n'
+
+const en = {
+  hello: 'Hello',
+  goodbye: 'Goodbye',
+  helloButGoodbye: '$this.hello, but $this.goodbye',
 }
 
 const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
