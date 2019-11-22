@@ -32,6 +32,8 @@ export function interp(fn: (...args: string[]) => string) {
   }
 }
 
+const THIS_REGEX = /\$this[.|a-z|0-9]+/g
+
 function get(obj: any, path: string) {
   return path.split('.').reduce((car, key) => car[key], obj)
 }
@@ -73,12 +75,18 @@ export class TypedI18n<L extends string, T> {
           (car, arg, index) => car.replace(`$${index + 1}`, arg),
           trans[field],
         )
-        const THIS_REGEX = /\$this[.|a-z|0-9]+/g
         const thisArgs = argsFilled.match(THIS_REGEX)
         if (!thisArgs) {
           return argsFilled
         }
         const thisFilled = thisArgs.reduce((car, thisArg) => {
+          if (thisArg.endsWith('.')) {
+            const variable = get(
+              trans,
+              thisArg.slice(0, -1).replace('$this.', ''),
+            )
+            return `${car.replace(thisArg, variable)}.`
+          }
           const variable = get(trans, thisArg.replace('$this.', ''))
           return car.replace(thisArg, variable)
         }, value)
