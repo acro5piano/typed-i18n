@@ -5,18 +5,6 @@
 
 type-safe i18n library
 
-# Install
-
-```
-npm install --save typed-i18n
-```
-
-Or if you use Yarn:
-
-```
-yarn add typed-i18n
-```
-
 # Why
 
 The aim of `typed-i18n` is to provide zero-configuration type-safe i18n feature.
@@ -28,6 +16,28 @@ Typical i18n libraries uses the syntax of `t('group.key')`, which is apparently 
 - Build-time type safety
 - Editor supports
 - Checking i18n coverage in TS level
+
+Also `typed-i18n` supports two translation flows:
+
+**engineer-driven translation**
+
+Engineers directly write translations. We can completely make them type-safe.
+
+**translator-driven translation**
+
+translators fill yaml/json/spreadsheets/(any) then compile it. It is a common pattern, but type-safety is losed to some extent.
+
+# Install
+
+```
+npm install --save typed-i18n
+```
+
+Or if you use Yarn:
+
+```
+yarn add typed-i18n
+```
 
 # Usage
 
@@ -60,7 +70,7 @@ t.setLocale('ja')
 console.log(t.trans.hello) // => こんにちは
 ```
 
-If there are some mistakes in your translations, TS will check them.
+If there are any mistakes in your translations, TS will check them.
 
 # Type-safety
 
@@ -73,7 +83,7 @@ t.setLocale('cn')
 // missing the key
 t.trans.notExistKey
 
-// try to add a locale with missing keys
+// trying to add a locale with missing keys
 t.addLocale('de', {
   hello: 'Guten Tag',
 })
@@ -83,6 +93,10 @@ t.addLocale('de', {
 
 Interpolation is one of the most used functionalities in I18N. It enables you to integrate dynamic values into your translations.
 
+There are two options to implement it:
+
+**1. use `interp` function**
+
 ```typescript
 import TypedI18n, { interp } from 'typed-i18n'
 
@@ -90,37 +104,59 @@ const en = {
   greeting: interp(name => `Hello, ${name}`),
 }
 
-const ja = {
-  greeting: interp(name => `こんにちは、 ${name}`),
-}
-
-// ...
+const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
 
 console.log(t.trans.greeting('John')) // => Hello, John
 ```
 
-# Nesting
-
-You can nest your translations by creating getter functions:
+**2. define `$index` and call `withArgs` method**
 
 ```typescript
-import TypedI18n, { interp } from 'typed-i18n'
+import TypedI18n from 'typed-i18n'
+
+const en = {
+  greeting: `Hello, $1`,
+}
+
+const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
+
+console.log(t.withArgs('John').trans.greeting) // => Hello, John
+```
+
+# Nesting
+
+You can nest your translations. There are two options to implement it:
+
+**1. use getter functions**
+
+```typescript
+import TypedI18n from 'typed-i18n'
 
 const en = {
   hello: 'Hello',
   goodbye: 'Goodbye',
-  helloButGoodbye: () => `${en.hello}, but ${en.goodbye}`,
+  helloButGoodbye: () => `${en.hello}, but ${en.goodbye}.`,
 }
 
-const ja = {
-  hello: 'こんにちは',
-  goodbye: 'さようなら',
-  helloButGoodbye: () => `${ja.hello}ですが${ja.goodbye}`,
+const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
+
+console.log(t.trans.helloButGoodbye) // => Hello, but Goodbye.
+```
+
+**2. use `$this` expression**
+
+```typescript
+import TypedI18n from 'typed-i18n'
+
+const en = {
+  hello: 'Hello',
+  goodbye: 'Goodbye',
+  helloButGoodbye: '$this.hello, but $this.goodbye.',
 }
 
-// ...
+const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
 
-console.log(t.trans.helloButGoodbye) // => Hello, but Goodbye
+console.log(t.trans.helloButGoodbye) // => Hello, but Goodbye.
 ```
 
 # React bindings
@@ -129,17 +165,16 @@ You can use `typed-i18n` with React:
 
 ```typescript
 // i18n.ts
-import TypedI18n from 'typed-i18n'
-import { createContextHooks } from 'typed-i18n/jsx'
+import TypedI18n, { createContextHooks } from 'typed-i18n'
 
 const en = {
   hello: 'Hello',
-  goodbye: 'Goodbye',
+  changeLocale: 'Change Locale',
 }
 
 const ja = {
   hello: 'こんにちは',
-  goodbye: 'さようなら',
+  changeLocale: '言語を変える',
 }
 
 type Lang = 'en' | 'ja'
@@ -170,7 +205,7 @@ function App() {
     <div className="App">
       <div className="App-title">{t.trans.hello}</div>
       <div className="App-btn" onClick={changeLang}>
-        {t.trans.goodbye}
+        {t.trans.changeLocale}
       </div>
     </div>
   )
