@@ -70,7 +70,7 @@ t.setLocale('ja')
 console.log(t.trans.hello) // => こんにちは
 ```
 
-If there are some mistakes in your translations, TS will check them.
+If there are any mistakes in your translations, TS will check them.
 
 # Type-safety
 
