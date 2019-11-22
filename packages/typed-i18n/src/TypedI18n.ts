@@ -35,6 +35,7 @@ export function interp(fn: (...args: string[]) => string) {
 export class TypedI18n<L extends string, T> {
   locale!: L
   transMap = new Map<L, Trans<T>>()
+  args: string[] = []
 
   addLocale(lang: L, trans: Trans<T>): this {
     const interop = transform(trans)
@@ -47,6 +48,28 @@ export class TypedI18n<L extends string, T> {
     return this
   }
 
+  withArgs(...args: string[]) {
+    this.args = args
+    return this
+  }
+
+  getTransProxyHandler() {
+    return {
+      get: (trans: any, field: string): typeof Proxy | string => {
+        const args = this.args
+        const value = trans[field]
+        if (typeof value === 'object') {
+          return new Proxy(value, this.getTransProxyHandler())
+        }
+        this.args = []
+        return args.reduce(
+          (car, arg, index) => car.replace(`$${index + 1}`, arg),
+          trans[field],
+        )
+      },
+    }
+  }
+
   get trans(): T {
     if (this.transMap.size === 0) {
       throw new Error('Please add at least one locale')
@@ -56,7 +79,10 @@ export class TypedI18n<L extends string, T> {
       console.warn(`[typed-i18n] warning: falling back to ${locale}`)
       this.locale = locale
     }
-    return this.transMap.get(this.locale)!
+    return new Proxy(
+      this.transMap.get(this.locale)!,
+      this.getTransProxyHandler(),
+    )
   }
 }
 

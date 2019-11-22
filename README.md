@@ -73,7 +73,7 @@ t.setLocale('cn')
 // missing the key
 t.trans.notExistKey
 
-// try to add a locale with missing keys
+// trying to add a locale with missing keys
 t.addLocale('de', {
   hello: 'Guten Tag',
 })
@@ -83,6 +83,10 @@ t.addLocale('de', {
 
 Interpolation is one of the most used functionalities in I18N. It enables you to integrate dynamic values into your translations.
 
+There are two options to implement it:
+
+**1. use `interp` function**
+
 ```typescript
 import TypedI18n, { interp } from 'typed-i18n'
 
@@ -90,13 +94,23 @@ const en = {
   greeting: interp(name => `Hello, ${name}`),
 }
 
-const ja = {
-  greeting: interp(name => `こんにちは、 ${name}`),
-}
-
-// ...
+const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
 
 console.log(t.trans.greeting('John')) // => Hello, John
+```
+
+**2. define `$index` and call `withArgs` method**
+
+```typescript
+import TypedI18n  from 'typed-i18n'
+
+const en = {
+  greeting: `Hello, ${name}`),
+}
+
+const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
+
+console.log(t.withArgs('John').trans.greeting) // => Hello, John
 ```
 
 # Nesting
@@ -104,7 +118,7 @@ console.log(t.trans.greeting('John')) // => Hello, John
 You can nest your translations by creating getter functions:
 
 ```typescript
-import TypedI18n, { interp } from 'typed-i18n'
+import TypedI18n from 'typed-i18n'
 
 const en = {
   hello: 'Hello',
@@ -112,13 +126,7 @@ const en = {
   helloButGoodbye: () => `${en.hello}, but ${en.goodbye}`,
 }
 
-const ja = {
-  hello: 'こんにちは',
-  goodbye: 'さようなら',
-  helloButGoodbye: () => `${ja.hello}ですが${ja.goodbye}`,
-}
-
-// ...
+const t = new TypedI18n<'en', typeof en>().addLocale('en', en)
 
 console.log(t.trans.helloButGoodbye) // => Hello, but Goodbye
 ```
@@ -133,12 +141,12 @@ import TypedI18n, { createContextHooks } from 'typed-i18n'
 
 const en = {
   hello: 'Hello',
-  goodbye: 'Goodbye',
+  changeLocale: 'Change Locale',
 }
 
 const ja = {
   hello: 'こんにちは',
-  goodbye: 'さようなら',
+  changeLocale: '言語を変える',
 }
 
 type Lang = 'en' | 'ja'
@@ -169,7 +177,7 @@ function App() {
     <div className="App">
       <div className="App-title">{t.trans.hello}</div>
       <div className="App-btn" onClick={changeLang}>
-        {t.trans.goodbye}
+        {t.trans.changeLocale}
       </div>
     </div>
   )
