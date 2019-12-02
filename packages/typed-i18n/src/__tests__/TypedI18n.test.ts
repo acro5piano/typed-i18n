@@ -11,6 +11,8 @@ const en = {
   screen: {
     title: 'Welcome',
     howdy: 'Welcome, $1',
+    helloButGoodbyeWithInterp:
+      '$this.screen.title, $this.hello, but $this.goodbye.',
   },
 }
 
@@ -24,6 +26,8 @@ const ja = {
   screen: {
     title: 'ようこそ',
     howdy: 'ようこそ、 $1',
+    helloButGoodbyeWithInterp:
+      '$this.screen.title, $this.hello, but $this.goodbye.',
   },
 }
 
@@ -39,6 +43,9 @@ test('TypedI18n', () => {
   expect(t.trans.helloWithName('John')).toBe('Hello, John')
   expect(t.trans.helloButGoodbye).toBe('Hello, but Goodbye')
   expect(t.trans.helloButGoodbyeWithInterp).toBe('Welcome, Hello, but Goodbye.')
+  expect(t.trans.screen.helloButGoodbyeWithInterp).toBe(
+    'Welcome, Hello, but Goodbye.',
+  )
   expect(t.trans.screen.title).toBe('Welcome')
   expect(t.withArgs('Welcome', 'John').trans.howdy).toBe('Welcome, John')
   expect(t.withArgs('John').trans.screen.howdy).toBe('Welcome, John')

@@ -82,12 +82,15 @@ export class TypedI18n<L extends string, T> {
         const thisFilled = thisArgs.reduce((car, thisArg) => {
           if (thisArg.endsWith('.')) {
             const variable = get(
-              trans,
+              this.getCurrentTransmap(),
               thisArg.slice(0, -1).replace('$this.', ''),
             )
             return `${car.replace(thisArg, variable)}.`
           }
-          const variable = get(trans, thisArg.replace('$this.', ''))
+          const variable = get(
+            this.getCurrentTransmap(),
+            thisArg.replace('$this.', ''),
+          )
           return car.replace(thisArg, variable)
         }, value)
         return thisFilled
@@ -104,10 +107,11 @@ export class TypedI18n<L extends string, T> {
       console.warn(`[typed-i18n] warning: falling back to ${locale}`)
       this.locale = locale
     }
-    return new Proxy(
-      this.transMap.get(this.locale)!,
-      this.getTransProxyHandler(),
-    )
+    return new Proxy(this.getCurrentTransmap(), this.getTransProxyHandler())
+  }
+
+  getCurrentTransmap() {
+    return this.transMap.get(this.locale)!
   }
 }
 
