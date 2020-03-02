@@ -39,3 +39,5 @@ export function createContextHooks<L extends string, T>(t: TypedI18n<L, T>) {
   }
   return { useTrans, useChangeLocale, Provider }
 }
+
+export default createContextHooks

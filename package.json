@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test": "jest",
-    "test:coverage": "yarn test --coverage"
+    "test:coverage": "yarn test --coverage",
+    "postinstall": "yarn workspaces run prepublish"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
