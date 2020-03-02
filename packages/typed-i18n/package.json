@@ -7,9 +7,7 @@
   "author": "gosho-kazuya <ketsume0211@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
-    "test:coverage": "yarn test --coverage",
     "build": "rm -rf build && tsc && rm -rf build/__tests__",
-    "prepare": "yarn build"
+    "prepublish": "yarn build"
   }
 }

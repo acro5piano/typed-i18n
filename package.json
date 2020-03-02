@@ -10,9 +10,7 @@
   },
   "scripts": {
     "test": "jest",
-    "test:coverage": "yarn test --coverage",
-    "build": "rm -rf build && tsc && rm -rf build/__tests__",
-    "prepare": "yarn build"
+    "test:coverage": "yarn test --coverage"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
