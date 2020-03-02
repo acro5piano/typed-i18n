@@ -1,6 +1,6 @@
 {
   "name": "typed-i18n",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "repository": "git@github.com:acro5piano/typed-i18n",
