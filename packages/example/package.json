@@ -10,7 +10,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepublish": "echo \"no prepublish scripts here\"",
-    "server": "ts-node server.ts"
+    "server": "ts-node --project ./tsconfig.server.json server.ts"
   },
   "dependencies": {
     "react": "^16.12.0",
