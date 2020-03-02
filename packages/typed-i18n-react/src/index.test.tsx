@@ -1,6 +1,6 @@
 import * as React from 'react'
-import TypedI18n from '../TypedI18n'
-import { createContextHooks } from '../jsx'
+import TypedI18n from 'typed-i18n'
+import { createContextHooks } from '.'
 import TestRenderer from 'react-test-renderer' // ES6
 
 const en = {

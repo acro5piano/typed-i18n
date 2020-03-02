@@ -1,13 +1,11 @@
 {
-  "private": true,
+  "name": "typed-i18n-react",
+  "version": "0.2.1",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "repository": "git@github.com:acro5piano/typed-i18n",
   "author": "gosho-kazuya <ketsume0211@gmail.com>",
   "license": "MIT",
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
   "scripts": {
     "test": "jest",
     "test:coverage": "yarn test --coverage",
@@ -15,14 +13,13 @@
     "prepare": "yarn build"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.23",
-    "@types/node": "^12.12.9",
-    "jest": "^24.9.0",
-    "prettier": "^1.19.1",
-    "ts-jest": "^24.1.0",
-    "typescript": "^3.7.2"
+    "@types/react": "^16.9.11",
+    "@types/react-test-renderer": "^16.9.1",
+    "react": "^16.12.0",
+    "react-test-renderer": "^16.12.0"
   },
   "peerDependencies": {
-    "react": "^16.12.0"
+    "react": "^16.12.0",
+    "typed-i18n": "^0.2.1"
   }
 }

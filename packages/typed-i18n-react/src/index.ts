@@ -1,5 +1,5 @@
 import * as React from 'react'
-import TypedI18n from './TypedI18n'
+import TypedI18n from 'typed-i18n'
 
 const I18nContext = React.createContext<TypedI18n<any, any>>(null as any)
 
