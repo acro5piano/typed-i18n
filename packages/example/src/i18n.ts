@@ -1,4 +1,5 @@
-import TypedI18n, { createContextHooks } from 'typed-i18n'
+import TypedI18n from 'typed-i18n'
+import { createContextHooks } from 'typed-i18n-react'
 
 const en = {
   hello: 'Hello',
@@ -18,3 +19,5 @@ const t = new TypedI18n<Lang, Translations>()
   .addLocale('ja', ja)
 
 export const { useTrans, useChangeLocale, Provider } = createContextHooks(t)
+
+export default t

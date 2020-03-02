@@ -15,7 +15,7 @@ function transform<T extends {}>(obj: T): Trans<T> {
     if (typeof value === 'object') {
       return { ...car, [key]: transform(value) }
     }
-    if (value.name === 'lazyIntorp') {
+    if (value.__NAME === 'lazyInterp') {
       return { ...car, [key]: value }
     }
     return { ...car, [key]: value() }
@@ -26,10 +26,12 @@ export function createLocale<T>(trans: Trans<T>) {
   return trans
 }
 
-export function interp(fn: (...args: string[]) => string) {
-  return function lazyIntorp(...args: string[]) {
+export function interp(fn: (...args: Argument[]) => string) {
+  const lazyInterp = (...args: Argument[]) => {
     return fn(...args)
   }
+  ;(lazyInterp as any).__NAME = 'lazyInterp'
+  return lazyInterp
 }
 
 const THIS_REGEX = /\$this[.|a-z|0-9]+/g
@@ -38,10 +40,12 @@ function get(obj: any, path: string) {
   return path.split('.').reduce((car, key) => car[key], obj)
 }
 
+type Argument = string | number
+
 export class TypedI18n<L extends string, T> {
   locale!: L
   transMap = new Map<L, Trans<T>>()
-  args: string[] = []
+  args: Argument[] = []
 
   addLocale(lang: L, trans: Trans<T>): this {
     const interop = transform(trans)
@@ -54,7 +58,7 @@ export class TypedI18n<L extends string, T> {
     return this
   }
 
-  withArgs(...args: string[]) {
+  withArgs(...args: Argument[]) {
     this.args = args
     return this
   }
@@ -75,6 +79,9 @@ export class TypedI18n<L extends string, T> {
           (car, arg, index) => car.replace(`$${index + 1}`, arg),
           trans[field],
         )
+        if (!argsFilled) {
+          throw new Error(`Translations is missing with key: ${field}`)
+        }
         const thisArgs = argsFilled.match(THIS_REGEX)
         if (!thisArgs) {
           return argsFilled

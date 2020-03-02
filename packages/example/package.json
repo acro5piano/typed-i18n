@@ -9,7 +9,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "ts-node server.ts"
+    "prepublish": "echo \"no prepublish scripts here\"",
+    "server": "ts-node --project ./tsconfig.server.json server.ts"
   },
   "dependencies": {
     "react": "^16.12.0",
