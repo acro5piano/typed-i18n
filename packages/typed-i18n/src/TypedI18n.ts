@@ -15,7 +15,7 @@ function transform<T extends {}>(obj: T): Trans<T> {
     if (typeof value === 'object') {
       return { ...car, [key]: transform(value) }
     }
-    if (value.name === 'lazyIntorp') {
+    if (value.__NAME === 'lazyInterp') {
       return { ...car, [key]: value }
     }
     return { ...car, [key]: value() }
@@ -27,9 +27,11 @@ export function createLocale<T>(trans: Trans<T>) {
 }
 
 export function interp(fn: (...args: string[]) => string) {
-  return function lazyIntorp(...args: string[]) {
+  const lazyInterp = (...args: string[]) => {
     return fn(...args)
   }
+  ;(lazyInterp as any).__NAME = 'lazyInterp'
+  return lazyInterp
 }
 
 const THIS_REGEX = /\$this[.|a-z|0-9]+/g
