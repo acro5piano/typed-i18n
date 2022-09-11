@@ -1,3 +1,5 @@
+# Deprecated. Please use https://lingui.js.org/ instead
+
 [![CircleCI](https://circleci.com/gh/acro5piano/typed-i18n.svg?style=svg)](https://circleci.com/gh/acro5piano/typed-i18n)
 [![npm version](https://badge.fury.io/js/typed-i18n.svg)](https://badge.fury.io/js/typed-i18n)
 
